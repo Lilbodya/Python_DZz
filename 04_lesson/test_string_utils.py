@@ -4,6 +4,8 @@ utils = StringUtils()
 
 
 # Тесты для capitalize
+
+
 def test_capitalize_positive_string():
     result = utils.capitalize("skypro")
     assert result == "Skypro"
