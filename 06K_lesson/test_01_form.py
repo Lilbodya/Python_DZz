@@ -1,6 +1,5 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver.edge.service import Service as EdgeService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -8,9 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 @pytest.fixture
 def driver():
-    edge_driver_path = r"C:\Users\BeGraphics\
-        Desktop\driver chrome\msedgedriver.exe"
-    driver = webdriver.Edge(service=EdgeService(edge_driver_path))
+    driver = webdriver.Firefox()
     driver.maximize_window()
     yield driver
     driver.quit()
@@ -36,14 +33,8 @@ def test_form_validation(driver):
 
     driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
 
-    wait.until(lambda d: any(
-        "is-valid" in el.get_attribute(
-            "class") or "is-invalid" in el.get_attribute("class")
-        for el in d.find_elements(By.CSS_SELECTOR, "input")
-    ))
-
-    zip_code = driver.find_element(By.NAME, "zip-code")
-    assert "is-invalid" in zip_code.get_attribute(
+    zip_code = driver.find_element(By.ID, "zip-code")
+    assert "danger" in zip_code.get_attribute(
         "class"), "Zip code должен быть красным"
 
     valid_fields = [
@@ -52,9 +43,6 @@ def test_form_validation(driver):
     ]
 
     for field_name in valid_fields:
-        field = driver.find_element(By.NAME, field_name)
-        assert "is-valid" in field.get_attribute(
+        field = driver.find_element(By.ID, field_name)
+        assert "success" in field.get_attribute(
             "class"), f"Поле {field_name} должно быть зелёным"
-
-    print("✅ Тест пройден: Zip code красный, остальные зелёные")
-    input("Нажмите Enter, чтобы закрыть браузер...")
