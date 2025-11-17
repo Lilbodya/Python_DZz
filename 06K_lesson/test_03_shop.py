@@ -70,4 +70,3 @@ def test_saucedemo_shopping(driver):
         f"но получили ${total_amount}"
     )
 
-    print("✅ Тест пройден: итоговая сумма равна $58.29")
