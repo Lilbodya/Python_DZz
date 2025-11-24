@@ -28,5 +28,4 @@ class CheckoutPage:
 
     def get_total(self):
         total_text = self.driver.find_element(*self.TOTAL).text
-        # total_text выглядит так: "Total: $58.29"
         return total_text.replace("Total: $", "")
