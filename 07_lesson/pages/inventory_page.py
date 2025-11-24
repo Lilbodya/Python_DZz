@@ -5,7 +5,6 @@ class InventoryPage:
     def __init__(self, driver):
         self.driver = driver
 
-    # кнопки добавления в корзину
     def add_backpack(self):
         self.driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
 
@@ -15,6 +14,5 @@ class InventoryPage:
     def add_onesie(self):
         self.driver.find_element(By.ID, "add-to-cart-sauce-labs-onesie").click()
 
-    # переход в корзину
     def go_to_cart(self):
         self.driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
